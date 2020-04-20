@@ -3,7 +3,7 @@ import os, sys, subprocess
 import pandas as pandas
 import matplotlib.pyplot as plt
 
-path = 'COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
+path = 'csse_covid_19_data/csse_covid_19_time_series/'
 US_cases = path + 'time_series_covid19_confirmed_US.csv'
 US_deaths = path + 'time_series_covid19_deaths_US.csv'
 world_cases = path + 'time_series_covid19_confirmed_global.csv'
@@ -11,7 +11,7 @@ world_deaths = path + 'time_series_covid19_deaths_global.csv'
 last_commit = subprocess.Popen(['git', 'log', '-1', '--format=%cd'], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0].strip('\n')
 
 usage = """usage:
-./gen_covid19_epi_curve.py <regex> [options]
+../gen_covid19_epi_curve.py <regex> [options]
 
 Options:
 -c / --cut        begining of time series [--cut N_days]
@@ -26,7 +26,7 @@ Options:
 if len(sys.argv) < 2:
     raise Exception(usage)
 place = str(sys.argv[1])
-fname = ('plots/')+place.strip('(').strip(')').replace('|','_').replace(' ', '')+('.png')
+fname = ('../plots/')+place.strip('(').strip(')').replace('|','_').replace(' ', '')+('.png')
 cut, stacked, regional, save = (0, False, False, False)
 for arg, next_arg in zip(sys.argv, sys.argv[1:]):
     if arg == '-c' or arg == '--cut':
